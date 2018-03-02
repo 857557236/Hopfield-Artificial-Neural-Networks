@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddDistortionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDistortionForm.Designer.cs">
+      <DependentUpon>AddDistortionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PixelPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     <Compile Include="NeuronStates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddDistortionForm.resx">
+      <DependentUpon>AddDistortionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

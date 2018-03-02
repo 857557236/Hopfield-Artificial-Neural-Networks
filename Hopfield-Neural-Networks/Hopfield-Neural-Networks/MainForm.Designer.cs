@@ -40,6 +40,7 @@
             this.labelEnergy = new System.Windows.Forms.Label();
             this.labelPatternCount = new System.Windows.Forms.Label();
             this.labelNeuronCount = new System.Windows.Forms.Label();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pixelPictureBox)).BeginInit();
@@ -84,6 +85,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonClear);
             this.groupBox1.Controls.Add(this.buttonAddDistortion);
             this.groupBox1.Controls.Add(this.pixelPictureBox);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
@@ -95,7 +97,7 @@
             // 
             // buttonAddDistortion
             // 
-            this.buttonAddDistortion.Location = new System.Drawing.Point(6, 226);
+            this.buttonAddDistortion.Location = new System.Drawing.Point(341, 19);
             this.buttonAddDistortion.Name = "buttonAddDistortion";
             this.buttonAddDistortion.Size = new System.Drawing.Size(112, 23);
             this.buttonAddDistortion.TabIndex = 1;
@@ -107,7 +109,7 @@
             // 
             this.pixelPictureBox.BackColor = System.Drawing.Color.White;
             this.pixelPictureBox.Image = null;
-            this.pixelPictureBox.Location = new System.Drawing.Point(126, 21);
+            this.pixelPictureBox.Location = new System.Drawing.Point(27, 33);
             this.pixelPictureBox.Name = "pixelPictureBox";
             this.pixelPictureBox.Size = new System.Drawing.Size(200, 200);
             this.pixelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -150,6 +152,16 @@
             this.labelNeuronCount.Size = new System.Drawing.Size(0, 13);
             this.labelNeuronCount.TabIndex = 0;
             // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(341, 48);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(112, 23);
+            this.buttonClear.TabIndex = 2;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,6 +202,7 @@
         private System.Windows.Forms.Label labelEnergy;
         private System.Windows.Forms.Label labelPatternCount;
         private System.Windows.Forms.Label labelNeuronCount;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
 

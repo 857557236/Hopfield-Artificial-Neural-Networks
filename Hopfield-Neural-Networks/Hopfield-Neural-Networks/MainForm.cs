@@ -1,13 +1,9 @@
 ﻿using HopfieldNeuralNetworks.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -82,7 +78,7 @@ namespace HopfieldNeuralNetworks
             _neuralNetwork.EnergyChanged += new EnergyChangedHandler(neuralNetwork_EnergyChanged);
         }
 
-        void RunNeuralNetwork()
+        async Task RunNeuralNetwork()
         {
             Neuron[] initialState = new Neuron[_neuralNetwork.MemorySize];
 
@@ -92,7 +88,13 @@ namespace HopfieldNeuralNetworks
                     initialState[i * PatternDimension + j] = new Neuron(pixelPictureBox.pixels[i, j] == PixelPictureBox.WhiteColor ? NeuronStates.AlongField : NeuronStates.AgainstField);
                 }
 
-            _neuralNetwork.Run(initialState);
+            progressBar.Style = ProgressBarStyle.Marquee;
+            buttonRun.Enabled = false;
+
+            await _neuralNetwork.Run(initialState);
+
+            progressBar.Style = ProgressBarStyle.Continuous;
+            buttonRun.Enabled = true;
         }
 
         private void neuralNetwork_EnergyChanged(object sender, EnergyEventArgs e)
@@ -171,10 +173,61 @@ namespace HopfieldNeuralNetworks
 
         void buttonAddDistortion_Click(object sender, EventArgs e)
         {
+            AddDistortionForm addDistortionForm = new AddDistortionForm();
+            addDistortionForm.ShowDialog();
 
+            if (!addDistortionForm._isAdded)
+                return;
+
+            Bitmap pattern = new Bitmap(pixelPictureBox.Width, pixelPictureBox.Height);
+            pixelPictureBox.DrawToBitmap(pattern, pixelPictureBox.ClientRectangle);
+
+            _drawingGraphPaths.Clear();
+
+            pixelPictureBox.Image = pattern;
+
+            Random random = new Random();
+            int p = 0;
+            int k = 0;
+            if (addDistortionForm._isNegative)
+            {
+                int n = 0;
+                int m = 0;
+                while (n != pixelPictureBox.Width)
+                {
+                    while (m != pixelPictureBox.Height)
+                    {
+                        pixelPictureBox.InversePixel(n, m);
+                        m++;
+                    }
+
+                    m = 0;
+                    n++;
+                }
+            }
+
+            double realDistortionLevel = addDistortionForm._distortionLevel * Math.Pow(pixelPictureBox.Width, 2) / 100;
+
+            for (int i = 0; i < realDistortionLevel; i++)
+            {
+                p = random.Next(pixelPictureBox.Width);
+                k = random.Next(pixelPictureBox.Height);
+                pixelPictureBox.InversePixel(k, p);
+            }
+
+            pixelPictureBox.Invalidate();
         }
 
-        void buttonRun_Click(object sender, EventArgs e)
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            _drawingGraphPaths.Clear();
+
+            pixelPictureBox.Refresh();
+
+            _patternDrawn = false;
+        }
+
+        async void buttonRun_Click(object sender, EventArgs e)
         {
             if (!_patternDrawn)
             {
@@ -190,6 +243,8 @@ namespace HopfieldNeuralNetworks
             _drawingGraphPaths.Clear();
 
             pixelPictureBox.Image = pattern;
+
+            await RunNeuralNetwork();
         }
     }
 }

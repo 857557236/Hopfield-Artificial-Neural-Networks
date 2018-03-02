@@ -121,7 +121,7 @@ namespace HopfieldNeuralNetworks
             _energy = -1 * tempEnergy / 2;
         }
 
-        public async void Run(Neuron[] initialState)
+        public async Task Run(Neuron[] initialState)
         {
             _neurons = initialState;
 
