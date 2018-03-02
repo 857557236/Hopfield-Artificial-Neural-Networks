@@ -95,8 +95,11 @@ namespace HopfieldNeuralNetworks
             _patternCount++;
         }
         
-        public static void Clear()
+        public void Clear()
         {
+            _patternCount = 0;
+            _energy = 0;
+
             Parallel.For(0, _memorySize, (i) =>
             {
                 for (int j = 0; j < _memorySize; j++)

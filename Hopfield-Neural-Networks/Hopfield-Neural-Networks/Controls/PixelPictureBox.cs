@@ -24,11 +24,7 @@ namespace HopfieldNeuralNetworks.Controls
 
             Bitmap bitmap = new Bitmap(image);
 
-            pixels = new int[_width, _height];
-
-            for (int x = 0; x < _width; x++)
-                for (int y = 0; y < _height; y++)
-                    pixels[x, y] = bitmap.GetPixel(x, y).ToArgb();
+            pixels = bitmap.GetPixelArray();
 
             bitmap.Dispose();
         }
