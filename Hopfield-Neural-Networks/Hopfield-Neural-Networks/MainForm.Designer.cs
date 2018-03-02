@@ -34,13 +34,14 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonRun = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.buttonAddDistortion = new System.Windows.Forms.Button();
             this.pixelPictureBox = new HopfieldNeuralNetworks.Controls.PixelPictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelEnergy = new System.Windows.Forms.Label();
             this.labelPatternCount = new System.Windows.Forms.Label();
             this.labelNeuronCount = new System.Windows.Forms.Label();
-            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonGetRandom = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pixelPictureBox)).BeginInit();
@@ -85,6 +86,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonGetRandom);
             this.groupBox1.Controls.Add(this.buttonClear);
             this.groupBox1.Controls.Add(this.buttonAddDistortion);
             this.groupBox1.Controls.Add(this.pixelPictureBox);
@@ -94,6 +96,16 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Handdrawing Letter";
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(341, 77);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(112, 23);
+            this.buttonClear.TabIndex = 2;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // buttonAddDistortion
             // 
@@ -152,15 +164,15 @@
             this.labelNeuronCount.Size = new System.Drawing.Size(0, 13);
             this.labelNeuronCount.TabIndex = 0;
             // 
-            // buttonClear
+            // buttonGetRandom
             // 
-            this.buttonClear.Location = new System.Drawing.Point(341, 48);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(112, 23);
-            this.buttonClear.TabIndex = 2;
-            this.buttonClear.Text = "Clear";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            this.buttonGetRandom.Location = new System.Drawing.Point(341, 48);
+            this.buttonGetRandom.Name = "buttonGetRandom";
+            this.buttonGetRandom.Size = new System.Drawing.Size(112, 23);
+            this.buttonGetRandom.TabIndex = 3;
+            this.buttonGetRandom.Text = "Get Random Letter";
+            this.buttonGetRandom.UseVisualStyleBackColor = true;
+            this.buttonGetRandom.Click += new System.EventHandler(this.buttonGetRandom_Click);
             // 
             // MainForm
             // 
@@ -203,6 +215,7 @@
         private System.Windows.Forms.Label labelPatternCount;
         private System.Windows.Forms.Label labelNeuronCount;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonGetRandom;
     }
 }
 

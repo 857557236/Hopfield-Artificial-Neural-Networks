@@ -14,6 +14,7 @@ namespace HopfieldNeuralNetworks
         public static int PatternDimension = 40;
 
         static NeuralNetwork _neuralNetwork;
+        static NeuralTrainer _neuralTrainer;
 
         static Bitmap _neuralNetworkState;
 
@@ -64,8 +65,8 @@ namespace HopfieldNeuralNetworks
             Debug.WriteLine("Neural Network created.");
             toolStripStatusLabel.Text = "Neural Network created.";
 
-            NeuralTrainer neuralTrainer = new NeuralTrainer(PatternDimension);
-            int trainResult = await neuralTrainer.Train(_neuralNetwork);
+            _neuralTrainer = new NeuralTrainer(PatternDimension);
+            int trainResult = await _neuralTrainer.Train(_neuralNetwork);
             Debug.WriteLine(string.Format("Neural Network trained with {0} patterns.", trainResult));
             toolStripStatusLabel.Text = string.Format("Neural Network trained with {0} patterns.", trainResult);
 
@@ -218,7 +219,13 @@ namespace HopfieldNeuralNetworks
             pixelPictureBox.Invalidate();
         }
 
-        private void buttonClear_Click(object sender, EventArgs e)
+        async void buttonGetRandom_Click(object sender, EventArgs e)
+        {
+            Bitmap randomPattern = await _neuralTrainer.GetRandomPattern();
+            pixelPictureBox.Image = randomPattern;
+        }
+
+        void buttonClear_Click(object sender, EventArgs e)
         {
             _drawingGraphPaths.Clear();
 

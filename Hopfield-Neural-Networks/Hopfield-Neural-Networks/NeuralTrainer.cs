@@ -73,5 +73,27 @@ namespace HopfieldNeuralNetworks
 
             return _patternCount;
         }
+
+        public async Task<Bitmap> GetRandomPattern()
+        {
+
+            Bitmap randomPattern = await Task.Factory.StartNew(() =>
+            {
+                using (Bitmap charmapBitmap = new Bitmap(_charmapPath))
+                {
+                    int i = new Random().Next(0, _patternCount);
+                    int column = i % 10;
+                    int row = i / 10;
+
+                    int x = column * _charCellWidth + ((_charCellWidth - _patternDimension) / 2);
+                    int y = row * _charCellHeight + ((_charCellHeight - _patternDimension) / 2);
+
+                    randomPattern = charmapBitmap.Clone(new Rectangle(x, y, _patternDimension, _patternDimension), System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
+                    return randomPattern;
+                }
+            });
+
+            return randomPattern;
+        }
     }
 }
